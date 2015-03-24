@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from IPython.display import HTML
-from .base import d3_cont, d3_clear
+from ipythonD3.base import d3_cont, d3_clear
 
 set_chord = """
 <style>
@@ -105,7 +105,7 @@ function fade(opacity) {
 
 function select() {
   return function(g, i) {
-  kernel.execute('sl1.value = ' + g.index);
+  kernel.execute('Chord.instances[{{id}}].update('+g.index+')');
   };
 }
 
@@ -124,12 +124,15 @@ import random
 
 
 class Chord(HTML):
+    instances = {}
+
     def __init__(self, mat, c=None):
         self.id = random.randint(0, 100000)
         self.mat = mat
         self.c = c or [RGBToHTMLColor(rgb) for rgb in sns.color_palette()]
         self.shown = False
         self.data = d3_cont.replace("{{id}}", str(self.id))
+        self.instances[self.id] = self
 
     def make_html(self):
         N = len(self.mat)
@@ -141,3 +144,7 @@ class Chord(HTML):
         data = data.replace("{{id}}", str(self.id))
         self.shown = True
         return HTML(data)
+
+    def update(self, x):
+        self.value = x
+        print(x)

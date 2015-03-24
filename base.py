@@ -3,7 +3,6 @@
 D3-based visualisations for the IPython dashboard
 """
 from IPython.display import HTML, display
-from show_chord import Chord
 
 
 hide = """
