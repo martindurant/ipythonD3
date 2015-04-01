@@ -7,38 +7,41 @@ from IPython.display import HTML, display
 
 hide = """
 <style>
-
-.input_prompt {
-    display: none;
-}
-
-.input_area {
-    display: none;
-}
-
-.prompt {
-    display: none;
-}
-
-.output_stderr {
-    display: none;
-}
-
+.hidden {display: none;}
+.input_prompt {display: none;}
+.input_area {display: none;}
+.prompt {display: none;}
+.output_stderr {display: none;}
+.dashpanel (position: fixed;}
 </style>
-
 <script>
-$('#header-container').toggle();
-$('.header-bar').toggle();
-$('div#maintoolbar').toggle();
+$("#header").css('display', 'none');
+var psize = $("#notebook-continer").width()
+$("#notebook-container").css('width', '100%');
 </script>
 """
-show = hide.replace('none', 'inline')
+# and .container {width: page-width;} by script
+
+show = """
+<style>
+.input_prompt {display: inline;}
+.input_area {display: inline;}
+.prompt {display: inline;}
+.output_stderr {display: inline;}
+.dashpanel (position: static;}
+</style>
+<script>
+$("#header").css('display', 'block');
+$("#notebook-container").width(psize);
+</script>
+"""
 
 
 def dashboard(on=True):
     """Turn your notebook into a dashboard by hiding input prompts and output
 prompt zones. Execute with:
 
+from IPython.html.widgets import interact
 f = interact(dashboard, on=False)
 
 to leave a button with which you can retrieve the original layout."""
@@ -46,9 +49,7 @@ to leave a button with which you can retrieve the original layout."""
 
 d3_cont = """
 <script src="http://d3js.org/d3.v3.min.js"></script>
-<script src="//code.jquery.com/jquery-1.10.2.js"></script>
-<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-<div id="chart{{id}}" class="ui-widget-content"></div>
+<div id="chart{{id}}" class="dashpanel"></div>
 """
 
 d3_clear = """
