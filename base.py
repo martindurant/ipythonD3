@@ -16,7 +16,7 @@ hide = """
 </style>
 <script>
 $("#header").css('display', 'none');
-var psize = $("#notebook-continer").width()
+var psize = $("#notebook-continer").width();
 $("#notebook-container").css('width', '100%');
 </script>
 """
