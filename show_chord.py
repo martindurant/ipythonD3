@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from IPython.display import HTML
-from ipythonD3.base import d3_cont, d3_clear
+from .base import d3_cont, d3_clear
 
 set_chord = """
 <style>
@@ -9,6 +9,11 @@ set_chord = """
   fill-opacity: .67;
   stroke: #000;
   stroke-width: .5px;
+}
+
+#chart{{id}} {
+  z-index: 10;
+  position: absolute;
 }
 
 </style>
@@ -109,6 +114,9 @@ function select() {
   };
 }
 
+$(function() {
+$( "#chart{{id}}" ).draggable();
+});
 </script>
 """
 

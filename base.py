@@ -46,7 +46,9 @@ to leave a button with which you can retrieve the original layout."""
 
 d3_cont = """
 <script src="http://d3js.org/d3.v3.min.js"></script>
-<div id="chart{{id}}"></div>
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<div id="chart{{id}}" class="ui-widget-content"></div>
 """
 
 d3_clear = """
