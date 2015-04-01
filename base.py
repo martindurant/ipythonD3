@@ -64,9 +64,9 @@ def clean_ipynb(nb, nb2):
 In case of embedded code in a notebook that prevents its proper display,
 remove all output cells.
 """
-    code = json.loads(open(nb).read)
+    code = json.loads(open(nb).read())
     cells = code['cells']
     for cell in cells:
         cell['outputs'] = []
-    out = json.dump(code)
+    out = json.dumps(code)
     open(nb2, 'w').write(out)
