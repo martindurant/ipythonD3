@@ -3,7 +3,7 @@
 D3-based visualisations for the IPython dashboard
 """
 from IPython.display import HTML, display
-
+import json
 
 hide = """
 <style>
@@ -57,3 +57,16 @@ d3_clear = """
 d3.select("#chart{{id}}").selectAll("*").remove()
 </script>
 """
+
+
+def clean_ipynb(nb, nb2):
+    """
+In case of embedded code in a notebook that prevents its proper display,
+remove all output cells.
+"""
+    code = json.loads(open(nb).read)
+    cells = code['cells']
+    for cell in cells:
+        cell['outputs'] = []
+    out = json.dump(code)
+    open(nb2, 'w').write(out)
